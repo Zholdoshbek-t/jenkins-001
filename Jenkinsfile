@@ -3,29 +3,18 @@ pipeline {
     triggers {
         pollSCM '*/3 * * * *'
     }
+    tools {
+        jdk 'java-11'
+    }
     stages {
-        stage('Build') {
+        stage('Build'){
             steps {
-                echo "Building.."
-                bat '''
-                echo "doing build stuff.."
-                '''
+                bat "mvn clean install -DskipTests"
             }
         }
-        stage('Test') {
-            steps {
-                echo "Testing.."
-                bat '''
-                echo "doing test stuff.."
-                '''
-            }
-        }
-        stage('Deliver') {
-            steps {
-                echo 'Deliver....'
-                bat '''
-                echo "doing delivery stuff.."
-                '''
+        stage('Test'){
+            steps{
+                bat "mvn test"
             }
         }
     }
