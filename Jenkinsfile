@@ -15,8 +15,10 @@ pipeline {
             }
         }
         stage('Jacoco Static Analysis') {
-            junit 'target/surefire-reports/**/*.xml'
-            jacoco()
+            steps {
+                junit 'target/surefire-reports/**/*.xml'
+                jacoco()
+            }
         }
         stage('SonarQube Scan') {
             steps {
