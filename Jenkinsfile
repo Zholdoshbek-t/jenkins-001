@@ -15,9 +15,8 @@ pipeline {
             }
         }
         stage('Jacoco Static Analysis') {
-            steps {
-                bat "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test"
-            }
+            junit 'target/surefire-reports/**/*.xml'
+            jacoco()
         }
         stage('SonarQube Scan') {
             steps {
